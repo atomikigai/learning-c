@@ -30,5 +30,11 @@ int main(void)
         printf("REVERSED: %d \n", reversed[j]);
     }
 
+    for (int i = N - 1; i >= 0; --i)
+    {
+        printf(" %d", arr[i]);
+        printf("\n");
+    }
+
     return 0;
 }
