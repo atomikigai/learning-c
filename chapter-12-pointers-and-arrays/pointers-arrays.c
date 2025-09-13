@@ -18,5 +18,10 @@ int main(void)
     printf("a[5] = %d\n", a[5]);
     printf("q = %d\n", *q);
 
+    // Resta de punteros
+    p = &a[8];
+    q = p - 3; // a[8 - 3] es igual a 5 me devuelve el valor almacenado en la posicion 5 del arreglo
+    printf("q = %d\n", *q);
+
     return 0;
 }
