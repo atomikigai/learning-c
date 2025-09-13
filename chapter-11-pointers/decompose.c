@@ -11,7 +11,7 @@ void decompose(double x, long *int_part, double *frac_part)
 void myprint(const int *n)
 {
     printf("Imprimiendo n: %d \n", *n);
-    printf("n no es modificable");
+    printf("n no es modificable\n");
 }
 
 int main(void)
@@ -25,6 +25,14 @@ int main(void)
 
     int n = 20;
     myprint(&n);
+
+    int z = 0, *p;
+    p = &z; // p apunta a la direccion de memoria de i
+    printf("Introduce un numero: ");
+    scanf("%d", p);
+
+    printf("Valor de p: %d", *p);
+    printf("Valor de z: %d", z);
 
     return 0;
 }

@@ -20,4 +20,15 @@ int main(void)
     q = &j;
     *q = *p;
     printf("q = %d j = %d \n", *q, j);
+
+    int h = 0, *x;
+    x = &h;
+    printf("x = %d\n", *x);
+    *x = 2;
+    printf("h = %d\n", h);
+    printf("x = %d", *x);
+
+    int *t;
+    *t = 1;
+    printf("VAR: %d", *t);
 }
