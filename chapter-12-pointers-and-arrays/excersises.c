@@ -1,0 +1,22 @@
+#include <stdio.h>
+
+int main(void)
+{
+
+    int a[] = {5, 15, 34, 54, 14, 2, 52, 72};
+    int *p = &a[1], *q = &a[5];
+
+    printf("(a) *(p+3) = %d\n", *(p + 3));
+    printf("(b) *(q-3) = %d\n", *(q - 3));
+    printf("(c) q - p  = %ld\n", q - p);
+    printf("(d) p < q  = %d\n", p < q);
+    printf("(e) *p < *q = %d\n", *p < *q);
+
+    return 0;
+}
+
+// 1. El valor de *p es 14
+// 2. El valor de *q es
+// 3. El valor de q - p es -2
+// 4. false
+// 5. true
