@@ -17,7 +17,7 @@ int my_str_len(const char *s)
 
 void my_reverse_str(const char *s)
 {
-    int len = str_len(s), i = 0;
+    int len = my_str_len(s), i = 0;
     char new[len + 1];
 
     while (len > 0)
