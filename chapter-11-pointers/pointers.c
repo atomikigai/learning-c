@@ -9,7 +9,7 @@ int main(void)
     // P apunta a la direccion en memoria de i
     p = &i;
 
-    i = 2; // P va a imprimir 2 porque
+    i = 2; // P va a imprimir 2
 
     // Imprimiendo el valor de i no la direccion en memoria
     printf("%d\n", *p);
