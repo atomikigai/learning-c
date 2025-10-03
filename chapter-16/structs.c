@@ -28,6 +28,14 @@ struct part new(char *name, int number, int on_hand)
     return p;
 }
 
+struct part new_v2(struct part *p, char *name, int number, int on_hand)
+{
+    p->number = number;
+    p->on_hand = on_hand;
+
+    strcpy(p->name, name);
+}
+
 int main(void)
 {
 
@@ -51,15 +59,26 @@ int main(void)
 
     // Desfortunadamente no podemos omitir la palabra struct al asignar el tipo a las variables
     // Siempre que asignamos el tipo se debe inicializar el objeto
-    struct part part4 = {620, "NVME", 20};
 
+    struct part part4 = {620, "NVME", 20};
     print_part(part4);
     printf("Part4: %d\n", part4.number);
 
     Part part5 = {720, "HDD", 1};
 
+    // Generar una estructura nueva provoca un overhead y es mejor retornar un puntero
+    // Se debe a la copia de datos
+
+    // 1. Asignar un espacio temporal en la memoria
+    // 2. Copiar byte a byte desde la meoria temporal a la local
+    // 3. transferir la copia
     struct part new_part = new("Mouse Gamer", 204, 12);
     print_part(new_part);
+
+    // Enfoque clasico
+    struct part mi_pieza;
+    new_v2(&mi_pieza, "Tornillo", 101, 500);
+    print_part(mi_pieza);
 
     return 0;
 }
