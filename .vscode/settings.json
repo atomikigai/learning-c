@@ -3,6 +3,7 @@
     "files.associations": {
         "stdio.h": "c",
         "text_encoding": "c",
-        "thread": "c"
+        "thread": "c",
+        "foo.h": "c"
     }
 }

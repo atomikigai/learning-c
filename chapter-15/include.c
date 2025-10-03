@@ -17,6 +17,7 @@
 // No se recomienda especificar rutas ya que el programa al llevar a otra maquina es complicado de compilar
 
 #include "boolean.h"
+#include "foo.h"
 
 int main(void)
 {
@@ -24,7 +25,11 @@ int main(void)
     int age = 18;
     int result = FALSE;
 
-    printf("Es mayor de edad: %d", result);
+    printf("Es mayor de edad: %d\n", result);
 
-    return FALSE
+    float t = test();
+
+    printf("\nT: %.2f", t);
+
+    return FALSE;
 }
