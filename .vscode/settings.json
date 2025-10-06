@@ -4,6 +4,8 @@
         "stdio.h": "c",
         "text_encoding": "c",
         "thread": "c",
-        "foo.h": "c"
+        "foo.h": "c",
+        "chrono": "c",
+        "typeinfo": "c"
     }
 }
