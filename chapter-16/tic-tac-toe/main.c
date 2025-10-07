@@ -22,36 +22,23 @@ typedef struct
 
 #define BOARD_LEN 3
 
-void print_board(char board[BOARD_LEN][BOARD_LEN])
+void init_board(char board[BOARD_LEN][BOARD_LEN])
 {
     int pos = 0;
-
-    printf("------- BOARD --------\n");
 
     for (int i = 0; i < BOARD_LEN; i++)
     {
         for (int j = 0; j < BOARD_LEN; j++)
         {
             pos++;
-            // board[i][j] = 'x';
-            //  printf(" %c ", board[i][j]);
             board[i][j] = pos + '0';
-            printf(" %c ", board[i][j]);
-
-            if (j == (BOARD_LEN - 1))
-            {
-                printf("\n");
-            }
         }
     }
-
-    printf("------- BOARD --------\n");
 }
 
-void visualize_board(char board[BOARD_LEN][BOARD_LEN])
+void print_board(char board[BOARD_LEN][BOARD_LEN])
 {
-
-    printf("------- BOARD --------\n");
+    printf("\n------- BOARD --------\n");
 
     for (int i = 0; i < BOARD_LEN; i++)
     {
@@ -66,7 +53,7 @@ void visualize_board(char board[BOARD_LEN][BOARD_LEN])
         }
     }
 
-    printf("------- BOARD --------\n");
+    printf("------- BOARD --------\n\n");
 }
 
 void replace_value(int val, char board[BOARD_LEN][BOARD_LEN], Player p)
@@ -77,8 +64,15 @@ void replace_value(int val, char board[BOARD_LEN][BOARD_LEN], Player p)
     {
         for (int j = 0; j < BOARD_LEN; j++)
         {
-            if (board[i][j] == pos && (board[i][j] != X || board[i][j] != O))
+            if (board[i][j] == pos)
             {
+
+                if (board[i][j] == X || board[i][j] == O)
+                {
+                    printf("¡Error! Esa posición ya esta ocupada.\n");
+                    return;
+                }
+
                 board[i][j] = p.symbol;
                 break;
             }
@@ -148,16 +142,12 @@ State check_columns(char board[BOARD_LEN][BOARD_LEN], Player p)
 
 State validate_result(char board[BOARD_LEN][BOARD_LEN], Player p)
 {
-    check_rows(board, p);
-    check_columns(board, p);
-    check_diagonal(board, p);
+    State result;
+    result = check_rows(board, p);
+    result = check_columns(board, p);
+    result = check_diagonal(board, p);
 
-    if (check_rows(board, p) == VICTORY || check_columns(board, p) == VICTORY || check_diagonal(board, p) == VICTORY)
-    {
-        return VICTORY;
-    }
-
-    return PLAYING;
+    return result;
 }
 
 void read_value(char board[BOARD_LEN][BOARD_LEN])
@@ -167,41 +157,40 @@ void read_value(char board[BOARD_LEN][BOARD_LEN])
     Player player_x = {"Jostick", X};
     Player player_o = {"Jose", O};
 
-    Player current_player = player_x;
+    Player *current_player = &player_x;
     State state = PLAYING;
 
     for (;;)
     {
 
-        printf("Turno del jugador: %s\n", current_player.name);
+        printf("Turno del jugador: %s\n", current_player->name);
         printf("Presiona el numero donde quieres colocar tu marca: ");
         scanf("%d", &number);
 
         if (number == 0)
         {
-            printf("Por favor introduce un número valido");
+            printf("Por favor introduce un número valido\n");
         }
 
-        replace_value(number, board, current_player);
-        visualize_board(board);
-
-        state = validate_result(board, current_player);
+        replace_value(number, board, *current_player);
+        print_board(board);
+        state = validate_result(board, *current_player);
 
         if (state == VICTORY)
         {
-            victory_message(current_player.name);
+            victory_message(current_player->name);
             break;
         }
 
         if (state == PLAYING)
         {
-            if (current_player.symbol == X)
+            if (current_player->symbol == X)
             {
-                current_player = player_o;
+                current_player = &player_o;
             }
             else
             {
-                current_player = player_x;
+                current_player = &player_x;
             }
         }
 
@@ -217,6 +206,7 @@ int main(void)
 
     char board[BOARD_LEN][BOARD_LEN];
 
+    init_board(board);
     print_board(board);
     read_value(board);
 
