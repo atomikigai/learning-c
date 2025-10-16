@@ -35,6 +35,44 @@ struct node *add_to_list(struct node *list, int n)
     return new_node;
 }
 
+struct node *search_list(struct node *list, int n)
+{
+    struct node *p;
+
+    // Ten en cuenta que la linea p->next apunta al siguiente nodo
+    //  osea p en el proximo ciclo sera el numero nodo cuando se termine de ejecutar el for
+    /* for (p = list; p != NULL; p = p->next)
+    {
+        if (p->value == n)
+        {
+            return p;
+        }
+    }
+ */
+
+    // Una forma mas limpia de escribirlo
+    while (list != NULL && list->value != n)
+    {
+        list = list->next;
+    }
+    return list;
+}
+
+// Eliminar un nodo de la lista
+// Una gran ventaja de almacenar data en una linked list es que es facil eliminar nodos.
+//  trailing pointer technique
+struct node *delete_from_lsit(struct node *list, int n)
+{
+    struct node *cur, *prev;
+
+    // 1. Entramos al primer nodo
+    // 2. Se comprueba si el primer nodo es NULL o diferente de N
+    // 3. Si es verdadero, entonces en prev guardo el nodeo anterior y actualizo cur con el siguiente nodo
+
+    for (cur = list, prev = NULL; cur != NULL && cur->value != n; prev = cur, cur = cur->next)
+        ;
+}
+
 int main(void)
 {
 
@@ -60,6 +98,10 @@ int main(void)
     // estariamos pasando a scanf el valor de new_node->value que tiene un tipo int
     // scanf("%d", &new_node->value);
 
+    // ok creo que entendi algo, cuando hago malloc abro ese espacio de memoria que esta digamos aparte y mas bien
+    // no disponible en mis variables directamente en C digamos que no teengo un new_node1, new_node2, etc..
+    // y por eso el uso de los punteros para acceder a esas direcciones de memoria porque first,
+    // siempre se va a quedar con el ultimo nodo insertado
     new_node = malloc(sizeof(struct node));
     new_node->value = 10;
     new_node->next = first;
@@ -82,6 +124,8 @@ int main(void)
 
     first = add_to_list(first, 40);
     printf("first: %d\n", first->value);
+
+    printf("Search value: %d", search_list(first, 30)->value);
 
     return 0;
 }
